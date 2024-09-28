@@ -1,46 +1,87 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
+import { optionsType } from "./Components/Types";
 import "./App.css";
+import Search from "./Components/Search";
 
 const  App = ():JSX.Element => {
- const [term, setTerm] = useState("")
+  const [term, setTerm] = useState<string>("");
+  const [options, setOptions] = useState<[]>([]);
+  const [city, setCity] = useState<optionsType | null>(null);
+  const [forecast, setForecast] = useState< null>(null)
 
-  const onInputChange = (e:ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    console.log(e.target.value);
-    
-    
+
+  
+  const getSearchOptions = (value:string) => {
+     fetch(
+       `http://api.openweathermap.org/geo/1.0/direct?q=${value.trim()}&limit=5&appid=16eeeb112c618cc4a926049619b19455`
+     )
+       .then((response) => response.json())
+       .then((data) => setOptions(data ));
   }
+
+
+  // SEARCH INPUT BUTTON
+  const onInputChange = (e:ChangeEvent<HTMLInputElement>) => {
+    const  value  = e.target.value.trim();
+    setTerm(value);
+    if (value === "") return
+    getSearchOptions(value)
+  }
+
+
+  const getForecast = (city:optionsType) => {
+     fetch(
+       `https://api.openweathermap.org/data/2.5/weather?lat=${city.lat}&lon=${city.lon}&units=metric&appid=16eeeb112c618cc4a926049619b19455`
+     )
+       .then((Response) => Response.json())
+       .then((data) => setForecast(data)); 
+  }
+
+  // ONSUBMIT
+  const onSubmit = () => {
+    if (!city) return
+    getForecast(city)
+  }
+
+  // OPTIONS DROPDOWN
+  const onOptionSelect = (option: optionsType) => {
+    setCity(option)
+     
+  }
+
+  // CLEAR
+  useEffect(() => {
+    if (city) {
+      setTerm(city.name)
+      setOptions([])
+    }
+  },[city])
+
   //api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
 
+  
 
-  http: return (
-    <>
-      <article>
-        <main className="flex justify-center items-center h-[100vh] w-full bg-gradient-to-br from-sky-400 via-rose-400 to-lime-400">
-          <section className="bg-white bg-opacity-blur-lg drop-shadow-lg rounded text-zinc-700 w-full md:max-w-[500px] p-4 flex flex-col text-center justify-center items-center h-full lg:h-[500px] bg-opacity-20">
-            <h1 className="text-4xl font-thin">
-              Weather <span className="font-black">Forecast</span>
-            </h1>
-            <p className="text-sm mt-2">
-              Enter the place you want to know the weather of and select an
-              option from the dropdown
-            </p>
-            <div className="flex mt-10 md:mt-4">
-              <input
-                type="text"
-                value={term}
-                className="px-2 py-1 rounded-1-md border-2 border-white"
-                onChange={onInputChange}
-              />
-              <button className="rounded-r-md border-2 text-zinc-100 hover:border-zinc-500 hover:text-zinc-500 px-2 py-1 cursor-pointer">
-                Search
-              </button>
-            </div>
-          </section>
-        </main>
-      </article>
-    </>
-  );
+ return (
+   <>
+     <article>
+       <main className="flex justify-center items-center h-[100vh] w-full bg-gradient-to-br from-sky-400 via-rose-400 to-lime-400">
+         
+         {forecast ? (
+         "We have a forecast"
+         ):
+           (
+           
+         <Search
+           term={term}
+           options={options}
+           onInputChange={onInputChange}
+           onOptionSelect={onOptionSelect}
+           onSubmit={onSubmit} />
+         )}
+       </main>
+     </article>
+   </>
+ );
 }
 
 export default App;
