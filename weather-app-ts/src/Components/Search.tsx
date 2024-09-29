@@ -18,7 +18,7 @@ const Search = ({term, options, onInputChange, onOptionSelect, onSubmit }:Handle
       <article>
         <main className="flex justify-center items-center h-[100vh] w-full bg-gradient-to-br from-sky-400 via-rose-400 to-lime-400">
           <section className="bg-white bg-opacity-blur-lg drop-shadow-lg rounded text-zinc-700 w-full md:max-w-[500px] p-4 flex flex-col text-center justify-center items-center h-full lg:h-[500px] bg-opacity-20">
-            <h1 className="text-4xl font-thin">
+            <h1 className="text-4xl font-thin text-white">
               Weather <span className="font-black text-blue-600">Forecast</span>
             </h1>
             <p className="text-sm mt-2">

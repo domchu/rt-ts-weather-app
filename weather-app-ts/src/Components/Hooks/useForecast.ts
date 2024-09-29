@@ -1,5 +1,5 @@
 import { useEffect, useState, ChangeEvent } from "react";
-import { optionsType } from "../Types";
+import { optionsType, forecastType } from "../Types";
 
 
 
@@ -8,7 +8,7 @@ const useForecast = () => {
     const [term, setTerm] = useState<string>("");
     const [options, setOptions] = useState<[]>([]);
     const [city, setCity] = useState<optionsType | null>(null);
-    const [forecast, setForecast] = useState<null>(null);
+    const [forecast, setForecast] = useState<forecastType | null>(null);
 
     const getSearchOptions = (value: string) => {
       fetch(
@@ -28,10 +28,16 @@ const useForecast = () => {
 
     const getForecast = (city: optionsType) => {
       fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${city.lat}&lon=${city.lon}&units=metric&appid=16eeeb112c618cc4a926049619b19455`
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${city.lat}&lon=${city.lon}&units=metric&appid=16eeeb112c618cc4a926049619b19455`
       )
         .then((Response) => Response.json())
-        .then((data) => setForecast(data));
+          .then((data) => {
+              const forecastData = {
+                  ...data.city,
+                  list:data.list.slice(0, 16)
+              }
+            setForecast(forecastData);
+        });
     };
 
     // ONSUBMIT

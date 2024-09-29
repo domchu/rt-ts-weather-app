@@ -17,7 +17,8 @@ const  App = ():JSX.Element => {
        <main className="flex justify-center items-center h-[100vh] w-full bg-gradient-to-br from-sky-400 via-rose-400 to-lime-400">
          
          {forecast ? (
-         "We have a forecast"
+          //  "We have a forecast"
+           forecast.sunrise
          ):
            (
            
