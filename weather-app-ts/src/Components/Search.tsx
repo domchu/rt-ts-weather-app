@@ -29,7 +29,7 @@ const Search = ({term, options, onInputChange, onOptionSelect, onSubmit }:Handle
               <input
                 type="text"
                 value={term}
-                className="px-2 py-1 rounded-1-md border-2 border-white"
+                className="px-2 py-1 rounded-l-md border-2 border-white"
                 onChange={onInputChange}
               />
 
