@@ -31,15 +31,34 @@ const Forecast = ({ dataforecast }: Props): JSX.Element => {
               </p>
               <p>
                 High Temp:
-                <Degree temp={Math.ceil(today.main.temp_max)} />
+                <Degree temp={Math.ceil(today.main.temp_max)} /> {""}
                 Low Temp:
                 <Degree temp={Math.floor(today.main.temp_min)} />
               </p>
             </section>
+            <section className="flex overflow-x-scroll mt-4 pb-2 mb-5">
+              {dataforecast.list.map((item, index) => (
+                <div
+                  key={index}
+                  className="inline-block text-center w-[50px] flex-shrink-0"
+                >
+                  <p>{index === 0 ? "Now" : new Date(item.dt *1000).getHours()} </p>
+                  <img
+                    alt={`weather-icon-${item.weather[0].description}`}
+                    src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
+                  />
+                  <p className="text-sm">
+                    <Degree temp={Math.round(item.main.temp)} />
+                  </p>
+                </div>
+              ))}
+                    </section>
+                    
+                
           </div>
         </div>
       </>
     );
 }
 
-export default Forecast  
+export default Forecast        

@@ -7,7 +7,7 @@ import Forecast from "./Components/Forecast";
 const  App = ():JSX.Element => {
   const { onOptionSelect, onSubmit, term, onInputChange, options, forecast } =
     useForecast();
- 
+  
 
   return (
     <>
