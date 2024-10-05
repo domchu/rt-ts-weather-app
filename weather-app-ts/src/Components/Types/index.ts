@@ -1,6 +1,7 @@
 
 export type optionsType = {
-    name: string,
+  name: string,
+  country:string,
     lat: number,
     lon: number,
 }
@@ -14,7 +15,7 @@ export type forecastType = {
     {
       dt: number;
       main: {
-        eels_like: number;
+        feels_like: number;
         humidity: number;
         pressure: number;
         temp: number;

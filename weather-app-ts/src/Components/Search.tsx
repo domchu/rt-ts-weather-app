@@ -42,7 +42,7 @@ const Search = ({term, options, onInputChange, onOptionSelect, onSubmit }:Handle
                       className="text-left-text-sm w-full hover:bg-zinc-700 hover:text-white px-2 py-1 cursor-pointer"
                       onClick={() => onOptionSelect(option)}
                     >
-                      <p>{option.name}</p>
+                      <p>{option.name}</p> {option.country}
                     </button>
                   </li>
                 ))}
@@ -68,51 +68,5 @@ export default Search ;
 
 
 
-// const [term, setTerm] = useState<string>("");
-//   const [options, setOptions] = useState<[]>([]);
-//   const [city, setCity] = useState<optionsType | null>(null);
 
-//   const getSearchOptions = (value: string) => {
-//     fetch(
-//       `http://api.openweathermap.org/geo/1.0/direct?q=${value.trim()}&limit=5&appid=16eeeb112c618cc4a926049619b19455`
-//     )
-//       .then((response) => response.json())
-//       .then((data) => setOptions(data));
-//   };
 
-//   // SEARCH INPUT BUTTON
-//   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-//     const value = e.target.value.trim();
-//     setTerm(value);
-//     if (value === "") return;
-//     getSearchOptions(value);
-//   };
-
-//   const getForecast = (city: optionsType) => {
-//     fetch(
-//       `https://api.openweathermap.org/data/2.5/weather?lat=${city.lat}&lon=${city.lon}&units=metric&appid=16eeeb112c618cc4a926049619b19455`
-//     )
-//       .then((Response) => Response.json())
-//       .then((data) => console.log({ data }));
-//   };
-
-//   // ONSUBMIT
-//   const onSubmit = () => {
-//     if (!city) return;
-//     getForecast(city);
-//   };
-
-//   // OPTIONS DROPDOWN
-//   const onOptionSelect = (option: optionsType) => {
-//     setCity(option);
-//   };
-
-//   // CLEAR
-//   useEffect(() => {
-//     if (city) {
-//       setTerm(city.name);
-//       setOptions([]);
-//     }
-//   }, [city]);
-
-  //api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}

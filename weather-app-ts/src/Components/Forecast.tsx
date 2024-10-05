@@ -1,7 +1,9 @@
-import { getSunTime } from "./helpers"
+import { getHumidityValue, getPop, getSunTime, getVisibilityValue } from "./helpers"
 import Sunrise from "./Icons/Sunrise"
 import Sunset from "./Icons/Sunset"
+import Tile from "./Tile"
 import { forecastType } from "./Types"
+import { getWindDirection } from './helpers/index';
 
 type Props = {
     dataforecast:forecastType
@@ -59,15 +61,71 @@ const Forecast = ({ dataforecast }: Props): JSX.Element => {
               ))}
             </section>
             {/* SUNRISE */}
-            <section className="flex justify-between text-zinc-700">
-                        <div className="w-[140px] text-xs font-black flex flex-col items-center bg-white/20 backdrop-blur-ls rounded drop-shadow-lg py-5 mb-5">
-                            <Sunrise /> <span className="mt-3">
-                                {getSunTime(dataforecast.sunrise)}
-                        </span>
-                        </div>
-                        <div className="w-[140px] text-xs font-black flex flex-col items-center bg-white/20 backdrop-blur-ls rounded drop-shadow-lg py-5 mb-5">
-                        <Sunset/> <span className="mt-3">{getSunTime(dataforecast.sunset)} </span>
-                        </div>
+            <section className="flex flex-wrap justify-between text-zinc-700">
+              <div className="w-[140px] text-xs font-black flex flex-col items-center bg-white/20 backdrop-blur-ls rounded drop-shadow-lg py-5 mb-5">
+                <Sunrise />{" "}
+                <span className="mt-3">{getSunTime(dataforecast.sunrise)}</span>
+              </div>
+              <div className="w-[140px] text-xs font-black flex flex-col items-center bg-white/20 backdrop-blur-ls rounded drop-shadow-lg py-5 mb-5">
+                <Sunset />{" "}
+                <span className="mt-3">{getSunTime(dataforecast.sunset)} </span>
+              </div>
+
+              {/* Wind */}
+              <Tile
+                icon="wind"
+                title="wind"
+                info={`${Math.round(today.wind.speed)} Km/h`}
+                description={`${getWindDirection(
+                  Math.round(today.wind.deg)
+                )}, gusts ${today.wind.gust.toFixed(1)} Km/h`}
+              />
+
+              {/* Feels */}
+              <Tile
+                icon="feels"
+                title="feels Like"
+                info={<Degree temp={Math.round(today.main.feels_like)} />}
+                description={`feels ${
+                  Math.round(today.main.feels_like) <
+                  Math.round(today.main.temp)
+                    ? "Cooler"
+                    : "Warmer"
+                }`}
+              />
+              {/* Humidity */}
+              <Tile
+                icon="humidity"
+                title="humidity"
+                info={`${today.main.humidity}`}
+                description={getHumidityValue(today.main.humidity)}
+              />
+
+              {/* Pop */}
+              <Tile
+                icon="pop"
+                title="Precipitation"
+                info={`${Math.round(today.pop * 100)}%`}
+                description={`${getPop(today.pop)}, cloud as ${
+                  today.clouds.all
+                }`}
+              />
+              {/* Pressure */}
+              <Tile
+                icon="pressure"
+                title="Pressure"
+                info={`${today.main.pressure}hpa`}
+                description={`${
+                  Math.round(today.main.pressure) < 1013 ? "Lower" : "Higher"
+                } than standard`}
+              />
+              {/* Visibility */}
+              <Tile
+                icon="visibility"
+                title="Visibility"
+                info={`${(today.visibility/1000).toFixed() }Km`}
+                description={getVisibilityValue(today.visibility)}
+              />
             </section>
           </div>
         </div>
@@ -75,4 +133,4 @@ const Forecast = ({ dataforecast }: Props): JSX.Element => {
     );
 }
 
-export default Forecast        
+export default Forecast     

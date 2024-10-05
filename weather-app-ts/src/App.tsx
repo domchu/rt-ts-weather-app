@@ -12,7 +12,7 @@ const  App = ():JSX.Element => {
   return (
     <>
       <article>
-        <main className="flex justify-center items-center h-[100vh] w-full bg-gradient-to-br from-sky-400 via-rose-400 to-lime-400">
+        <main className="flex justify-center items-center w-full bg-gradient-to-br from-sky-400 via-rose-400 to-lime-400">
           {forecast ? (
             //  "We have a forecast"
             <Forecast dataforecast={forecast} />

@@ -15,7 +15,8 @@ const useForecast = () => {
         `http://api.openweathermap.org/geo/1.0/direct?q=${value.trim()}&limit=5&appid=16eeeb112c618cc4a926049619b19455`
       )
         .then((response) => response.json())
-        .then((data) => setOptions(data));
+        .then((data) => setOptions(data))
+        .catch((e) => console.log(e));;
     };
 
     // SEARCH INPUT BUTTON
@@ -37,7 +38,7 @@ const useForecast = () => {
                   list:data.list.slice(0, 16)
               }
             setForecast(forecastData);
-        });
+        }).catch(e =>console.log(e));
     };
 
     // ONSUBMIT
