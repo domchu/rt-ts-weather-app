@@ -1,3 +1,6 @@
+import { getSunTime } from "./helpers"
+import Sunrise from "./Icons/Sunrise"
+import Sunset from "./Icons/Sunset"
 import { forecastType } from "./Types"
 
 type Props = {
@@ -42,7 +45,9 @@ const Forecast = ({ dataforecast }: Props): JSX.Element => {
                   key={index}
                   className="inline-block text-center w-[50px] flex-shrink-0"
                 >
-                  <p>{index === 0 ? "Now" : new Date(item.dt *1000).getHours()} </p>
+                  <p>
+                    {index === 0 ? "Now" : new Date(item.dt * 1000).getHours()}{" "}
+                  </p>
                   <img
                     alt={`weather-icon-${item.weather[0].description}`}
                     src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
@@ -52,9 +57,18 @@ const Forecast = ({ dataforecast }: Props): JSX.Element => {
                   </p>
                 </div>
               ))}
-                    </section>
-                    
-                
+            </section>
+            {/* SUNRISE */}
+            <section className="flex justify-between text-zinc-700">
+                        <div className="w-[140px] text-xs font-black flex flex-col items-center bg-white/20 backdrop-blur-ls rounded drop-shadow-lg py-5 mb-5">
+                            <Sunrise /> <span className="mt-3">
+                                {getSunTime(dataforecast.sunrise)}
+                        </span>
+                        </div>
+                        <div className="w-[140px] text-xs font-black flex flex-col items-center bg-white/20 backdrop-blur-ls rounded drop-shadow-lg py-5 mb-5">
+                        <Sunset/> <span className="mt-3">{getSunTime(dataforecast.sunset)} </span>
+                        </div>
+            </section>
           </div>
         </div>
       </>
