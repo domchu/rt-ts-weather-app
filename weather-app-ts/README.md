@@ -1,50 +1,59 @@
-# React + TypeScript + Vite
+# TypeScript Weather API
+---
+<div>
+<b>Quick menu:</b>
+<a href="https://theultimateapichallenge.com/challenges/weather-typescript-api" target="_blank" rel="noopener"
+    style="padding:0.35rem 0.7rem;
+    color: black;
+    background: #BDFFF3;
+    border-radius:10px;
+    font-size:0.85rem;
+    font-weight:600;">Challenge Page</a> |
+<a href="https://openweathermap.org/api" target="_blank" rel="noopener"
+    style="padding:0.35rem 0.7rem;
+    color: black;
+    background: #F1DEDE;
+    border-radius:10px;
+    font-size:0.85rem;
+    font-weight:600;">Official API Docs</a> |
+<!-- <a href="https://youtu.be/6MKFKwwhbNo" target="_blank" rel="noopener"
+    style="padding:0.35rem 0.7rem;
+    color: black;
+    background: #FE938C;
+    border-radius:10px;
+    font-size:0.85rem;
+    font-weight:600;">YouTube Video</a> 
+</div> -->
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+## Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<p>The <b>Weather API Challenge</b> in TypeScript ✨ project is the most longed for and it is here! We will dive intro ReactJS, TypeScript, Fetch and TailwindCSS. We will learn how to use react with typescript (very typescript beginner friendly!) and will learn how to fetch data from an api in the context of react typescript.</p>
 
-## Expanding the ESLint configuration
+<p>In this project we will work with a search field that listens to the user's input and makes an API call to get a suggestion of top 5 locations the user might be looking for. Once the user submits the search we will make another api call and get the user the weather data ✨</p>
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Tech stack
+```
+Core:
+- Javascript
+- ReactJS
+- TypeScript
+- TailwindCSS
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+Communication tool:
+- fetch
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+### Prerequisites
 ```
+Knowledge level: 
+A typescript beginner friendly challenge! Enough if you are familiar with reactJS or if you're willing to challenge yourself.
+
+Tech: 
+a computer/laptop to copy the files to with a code editor of your choice
+Text editor like Notepad, VS code, sublime text, Atom, Notepad++ etc
+```
+
+## Preview
+<img src="/preview.png" height="500" style="border-radius:10px;margin-bottom:1rem;" />
